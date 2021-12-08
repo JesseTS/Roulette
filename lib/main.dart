@@ -223,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _spin() {
-    _controller.duration = const Duration(seconds: 1);
+    _controller.duration = const Duration(seconds: 10);
     setState(() {
       _controller.reset();
       rewards.shuffle();
