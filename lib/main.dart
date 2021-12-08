@@ -92,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage>
 
         setState(() {
           result = rewards.removeAt(0);
+          loading = false;
         });
       }
     });
@@ -158,9 +159,11 @@ class _MyHomePageState extends State<MyHomePage>
                         child: Align(
                           alignment: Alignment.center,
                           child: FloatingActionButton(
-                            backgroundColor:
-                                rewards.isNotEmpty ? Colors.red : Colors.grey,
-                            onPressed: rewards.isNotEmpty ? _spin : null,
+                            backgroundColor: rewards.isNotEmpty && !loading
+                                ? Colors.red
+                                : Colors.grey,
+                            onPressed:
+                                rewards.isNotEmpty && !loading ? _spin : null,
                             tooltip: 'Spin',
                             child: const Text('Spin'),
                           ),
@@ -222,8 +225,9 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _spin() {
-    _controller.duration = Duration(seconds: Random().nextInt(10) + 10);
+    _controller.duration = Duration(seconds: Random().nextInt(10) + 5);
     setState(() {
+      loading = true;
       _controller.reset();
       rewards.shuffle();
       fromValue = toValue;
