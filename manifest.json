@@ -1,11 +1,11 @@
 {
-    "name": "roullete",
-    "short_name": "roullete",
+    "name": "Roulette",
+    "short_name": "Roulette",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Roullete",
+    "description": "Roulette",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
