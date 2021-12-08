@@ -81,7 +81,6 @@ class _MyHomePageState extends State<MyHomePage>
 
     _set();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
       animationBehavior: AnimationBehavior.preserve,
       vsync: this,
     );
@@ -223,7 +222,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _spin() {
-    _controller.duration = const Duration(seconds: 10);
+    _controller.duration = Duration(seconds: Random().nextInt(10) + 10);
     setState(() {
       _controller.reset();
       rewards.shuffle();
