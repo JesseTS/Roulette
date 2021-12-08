@@ -1,0 +1,40 @@
+{
+   "checksum": "3044253acffc7888e3ecf627effd4500",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13283149489038437",
+            "guid": "d6a11cab-a41e-46c2-9360-ece137272687",
+            "id": "5",
+            "name": "Flutter Demo",
+            "type": "url",
+            "url": "http://localhost:58118/#/"
+         } ],
+         "date_added": "13283148866672616",
+         "date_modified": "13283149489038437",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks Bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13283148866672621",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other Bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13283148866672623",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile Bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
