@@ -121,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage>
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: Colors.red,
       body: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -182,10 +183,11 @@ class _MyHomePageState extends State<MyHomePage>
               children: [
                 const Text(
                   '剩餘獎項:',
+                  style: TextStyle(color: Colors.white),
                 ),
                 Text(
                   '${rewards.length}',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: const TextStyle(fontSize: 48, color: Colors.white),
                 ),
                 SizedBox(
                   height: 150,
@@ -198,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage>
                       result != null
                           ? 'Congrats!\n你獲得了${price[result! - 1]}獎'
                           : '\n',
-                      style: TextStyle(fontSize: 48, color: Colors.pink),
+                      style: TextStyle(fontSize: 48, color: Colors.white),
                     ),
                   ),
                 ),
