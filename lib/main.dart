@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:roullete/input_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,6 +44,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
+  late final AudioCache _audioCache;
+  late AudioPlayer _audioPlayer;
   late AnimationController _controller;
   late CurvedAnimation _curvedAnimation;
   late double fromValue = 0;
@@ -72,12 +76,20 @@ class _MyHomePageState extends State<MyHomePage>
     4,
     6
   ];
-  var price = ['一', '二', '三', '四', '五', '六'];
+  var price = ['1st', '2nd', '3rd', '4th', '5th', '6th'];
   var loading = false;
 
   @override
   void initState() {
     super.initState();
+
+    _audioPlayer = AudioPlayer();
+    _audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+
+    _audioCache = AudioCache(
+      prefix: 'sound/',
+      fixedPlayer: AudioPlayer(),
+    );
 
     _set();
     _controller = AnimationController(
@@ -87,6 +99,8 @@ class _MyHomePageState extends State<MyHomePage>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
+        playResultSound();
+
         SharedPreferences.getInstance().then((prefs) =>
             prefs.setInt("reward$result", prefs.getInt("reward$result")! - 1));
 
@@ -98,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage>
     });
 
     _curvedAnimation =
-        CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuart);
+        CurvedAnimation(parent: _controller, curve: Curves.easeOutQuart);
   }
 
   @override
@@ -189,6 +203,7 @@ class _MyHomePageState extends State<MyHomePage>
                   '${rewards.length}',
                   style: const TextStyle(fontSize: 48, color: Colors.white),
                 ),
+                const SizedBox(height: 50),
                 SizedBox(
                   height: 150,
                   child: Visibility(
@@ -196,11 +211,33 @@ class _MyHomePageState extends State<MyHomePage>
                     maintainSize: true,
                     maintainAnimation: true,
                     maintainState: true,
-                    child: Text(
-                      result != null
-                          ? 'Congrats!\n你獲得了${price[result! - 1]}獎'
-                          : '\n',
-                      style: TextStyle(fontSize: 48, color: Colors.white),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Congrats!',
+                          style: TextStyle(fontSize: 32, color: Colors.white),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              'You won the ',
+                              style:
+                              TextStyle(fontSize: 32, color: Colors.white),
+                            ),
+                            Text(
+                              result!=null? '${price[result! - 1]}':'',
+                              style:
+                              TextStyle(fontSize: 48, color: Colors.white),
+                            ),
+                            Text(
+                              ' prize',
+                              style:
+                              TextStyle(fontSize: 32, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -226,8 +263,10 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 
+  double rate = 4;
+
   void _spin() {
-    _controller.duration = Duration(seconds: Random().nextInt(10) + 5);
+    _controller.duration = Duration(seconds: 5);
     setState(() {
       loading = true;
       _controller.reset();
@@ -244,7 +283,16 @@ class _MyHomePageState extends State<MyHomePage>
 
       result = null;
       _controller.forward();
+      playSpin();
     });
+  }
+
+  Future<void> playSpin() async {
+    _audioPlayer = await _audioCache.play('spin.mp3');
+  }
+
+  Future<void> playResultSound() async {
+    _audioPlayer = await _audioCache.play('prize.m4a');
   }
 
   void _reset() {

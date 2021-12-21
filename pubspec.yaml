@@ -37,6 +37,7 @@ dependencies:
   shared_preferences: ^2.0.8
   build_web_compilers: ^3.2.1
   build_runner: ^2.1.5
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
