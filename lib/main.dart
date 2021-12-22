@@ -195,17 +195,9 @@ class _MyHomePageState extends State<MyHomePage>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  '剩餘獎項:',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Text(
-                  '${rewards.length}',
-                  style: const TextStyle(fontSize: 48, color: Colors.white),
-                ),
-                const SizedBox(height: 50),
                 SizedBox(
                   height: 150,
+                  width: 320,
                   child: Visibility(
                     visible: result != null,
                     maintainSize: true,
@@ -213,27 +205,27 @@ class _MyHomePageState extends State<MyHomePage>
                     maintainState: true,
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Congrats!',
-                          style: TextStyle(fontSize: 32, color: Colors.white),
+                          style: TextStyle(fontSize: 40, color: Colors.white),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(
+                            const Text(
                               'You won the ',
                               style:
-                              TextStyle(fontSize: 32, color: Colors.white),
+                                  TextStyle(fontSize: 32, color: Colors.white),
                             ),
                             Text(
-                              result!=null? '${price[result! - 1]}':'',
+                              result != null ? '${price[result! - 1]}' : '',
                               style:
-                              TextStyle(fontSize: 48, color: Colors.white),
+                                  TextStyle(fontSize: 36, color: Colors.white),
                             ),
-                            Text(
+                            const Text(
                               ' prize',
                               style:
-                              TextStyle(fontSize: 32, color: Colors.white),
+                                  TextStyle(fontSize: 32, color: Colors.white),
                             ),
                           ],
                         ),
@@ -244,6 +236,47 @@ class _MyHomePageState extends State<MyHomePage>
                 Align(
                   child: Image.asset('/images/tree.png', width: 300),
                   alignment: Alignment.bottomRight,
+                ),
+                const SizedBox(height: 50),
+                const Text(
+                  '剩餘獎項:',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "大獎: ${rewards.where((element) => element == 1).length}",
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "二獎: ${rewards.where((element) => element == 2).length}",
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "三獎: ${rewards.where((element) => element == 3).length}",
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "四獎: ${rewards.where((element) => element == 4).length}",
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "五獎: ${rewards.where((element) => element == 5).length}",
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "六獎: ${rewards.where((element) => element == 6).length}",
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ],
                 ),
               ],
             ),
